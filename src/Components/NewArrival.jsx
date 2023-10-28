@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { Whisper } from "next/font/google";
+import Data from "@/utils/ProductData";
+import ProductCard from "./ProductCard";
 
 const whisper = Whisper({ subsets: ["latin"], weight: ["400"] });
 
@@ -33,7 +35,18 @@ const NewArrival = () => {
             </li>
           ))}
         </ul>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pt-8"></div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pt-8">
+          {Data.map((item) => (
+            <ProductCard
+              key={item.id}
+              id={item.id}
+              img={item.img}
+              name={item.name}
+              price={item.price}
+              sale={item.sale}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
