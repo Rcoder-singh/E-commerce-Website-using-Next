@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Whisper } from "next/font/google";
 import Data from "@/utils/ProductData";
 import ProductCard from "./ProductCard";
@@ -11,8 +11,30 @@ const tabsData = ["All", "Skin Care", "Lipsticks", "Makeup", "Nail & Wax"];
 const NewArrival = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
+  const [data, setData] = useState([]);
+
+  const shuffleArray = (array) => {
+    return array
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  };
+
+  useEffect(() => {
+    setData(shuffleArray(Data).slice(0, 15));
+  }, []);
+
   const handleTab = (index) => {
+    const category = tabsData[index].toLowerCase();
     setSelectedTab(index);
+
+    if (category == "all") {
+      setData(shuffleArray(Data).slice(0, 15));
+      return;
+    }
+
+    const filterData = Data.filter((item) => item.category.includes(category));
+    setData(shuffleArray(filterData))
   };
 
   return (
@@ -36,7 +58,7 @@ const NewArrival = () => {
           ))}
         </ul>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pt-8">
-          {Data.map((item) => (
+          {data.map((item) => (
             <ProductCard
               key={item.id}
               id={item.id}
