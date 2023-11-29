@@ -1,3 +1,4 @@
+import Category from "@/Components/Category";
 import Feature from "@/Components/Feature";
 import Hero from "@/Components/Hero";
 import NewArrival from "@/Components/NewArrival";
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <Feature />
       <NewArrival />
+      <Category />
     </main>
   );
 }
