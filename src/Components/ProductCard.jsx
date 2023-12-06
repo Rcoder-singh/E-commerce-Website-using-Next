@@ -1,3 +1,5 @@
+import { addToCart } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -10,6 +12,7 @@ import {
 
 const ProductCard = ({ id, img, name, price, sale }) => {
   const router = useRouter();
+  const dispatch =useAppDispatch()
   const getRating = () => {
     const randomNumber = (min, max) => {
       return Math.ceil(Math.random() * (max - min) + min);
@@ -87,6 +90,19 @@ const ProductCard = ({ id, img, name, price, sale }) => {
     }
   };
 
+  const addPoductToCart = (e) => {
+    e.stopPropagation()
+    const payload = {
+      id,
+      name,
+      img,
+      price,
+      quantity: 1,
+    };
+
+    dispatch(addToCart(payload))
+  };
+
   return (
     <div
       className="group cursor-pointer"
@@ -112,7 +128,7 @@ const ProductCard = ({ id, img, name, price, sale }) => {
             </div>
             <div
               className="bg-white w-[50px] h-[50px] text-[26px] grid place-items-center"
-              //   onClick={addPoductToCart}
+              onClick={addPoductToCart}
             >
               <AiOutlineShoppingCart />
             </div>
