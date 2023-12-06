@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import {
   AiFillStar,
@@ -8,8 +9,9 @@ import {
 } from "react-icons/ai";
 
 const ProductCard = ({ id, img, name, price, sale }) => {
+  const router = useRouter();
   const getRating = () => {
-    const randomNumber = (min,max) => {
+    const randomNumber = (min, max) => {
       return Math.ceil(Math.random() * (max - min) + min);
     };
 
@@ -86,7 +88,10 @@ const ProductCard = ({ id, img, name, price, sale }) => {
   };
 
   return (
-    <div className="group cursor-pointer">
+    <div
+      className="group cursor-pointer"
+      onClick={() => router.push(`/details/${id}`)}
+    >
       <div className="relative">
         <Image
           className="w-full"
@@ -113,8 +118,8 @@ const ProductCard = ({ id, img, name, price, sale }) => {
             </div>
           </div>
         </div>
-          </div>
-          {getRating()}
+      </div>
+      {getRating()}
       <h2 className="font-medium pb-3 hover:text-accent">{name}</h2>
       <p className="text-gray-600 font-light">${price}0</p>
     </div>
