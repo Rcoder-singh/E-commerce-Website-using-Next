@@ -9,7 +9,7 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       if (state.findIndex((pro) => pro.id === action.payload.id) === -1) {
         state.push(action.payload);
-      } else {
+      } else  {
         return state.map((item) =>
           item.id === action.payload.id
             ? { ...item, quantity: item.quantity + 1 }

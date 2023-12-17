@@ -90,7 +90,7 @@ const ProductCard = ({ id, img, name, price, sale }) => {
     }
   };
 
-  const addPoductToCart = (e) => {
+  const addProductToCart = (e) => {
     e.stopPropagation()
     const payload = {
       id,
@@ -128,7 +128,7 @@ const ProductCard = ({ id, img, name, price, sale }) => {
             </div>
             <div
               className="bg-white w-[50px] h-[50px] text-[26px] grid place-items-center"
-              onClick={addPoductToCart}
+              onClick={addProductToCart}
             >
               <AiOutlineShoppingCart />
             </div>

@@ -5,6 +5,8 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import { useState } from "react";
+import Cart from "@/Components/Cart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +16,14 @@ export const Metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const [showCart, setShowCart] = useState(false);
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <Provider store={store}>
-          <Navbar />
+          <Navbar setShowCart={setShowCart} />
+          {showCart && <Cart setShowCart={setShowCart} />}
           {children}
           <Footer />
         </Provider>
